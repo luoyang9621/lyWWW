@@ -1,0 +1,98 @@
+body,ul,ol,li,p,h1,h2,h3,h4,h5,h6,form,fieldset,table,td,img,div{margin:0;padding:0;border:0;} 
+body{background:#fff;color:#333;font-size:12px; margin-top:5px;font-family:"SimSun","宋体","Arial Narrow","yahei";} 
+ 
+ul,ol{list-style-type:none;} 
+select,input,img,select{vertical-align:middle;} 
+ 
+a{text-decoration:none;} 
+a:link{color:#009;} 
+a:visited{color:#800080;} 
+a:hover,a:active,a:focus{color:rgb(0, 88, 204);text-decoration:underline;} 
+input[type='text'],input[type='password'],input[type='number'],input[type='submit']{
+    height: 30px;
+    line-height: 30px;
+    min-width:60px;
+    border:1px solid #0058cc;
+    padding:5px 10px;
+    box-sizing: border-box;
+    border-radius:3px;
+    outline: none;
+}
+input[type='button'],button{
+    min-width:60px;
+    height:30px;
+    line-height: 30px;
+    box-sizing: border-box;
+    cursor: pointer;
+    border:1px solid #0058cc;
+    background-color: #0058cc;
+    color: #fff;
+    border-radius:5px;
+    outline: none;
+}
+input[type='button']:hover,button:hover{
+    background-color: #044396;
+    border-color:#044396;
+}
+input[type='button']:active,button:active{
+    background-color: #044396;
+    border-color:#044396;
+}
+input[type='button'].cancel-btn,button.cancel-btn{
+    background-color: #fff;
+    border:1px solid #e0e0e0;
+    color: #0058cc;
+}
+input[type='button'].cancel-btn:hover,button.cancel-btn:hover{
+    background-color: #0058cc;
+    color: #fff;
+
+}
+
+/*通用margin 和padding*/
+.ma0{margin: 0px;}
+.ml10{margin-left:10px;}
+.mr10{margin-right: 10px;}
+.mt10{margin-top: 10px;}
+.mb10{margin-bottom: 10px;}
+.ml20{margin-left:20px;}
+.mr20{margin-right: 20px;}
+.mt20{margin-top: 20px;}
+.mb20{margin-bottom: 20px;}
+
+.pa0{margin: 0px;}
+.pl10{margin-left:10px;}
+.pr10{margin-right: 10px;}
+.pt10{margin-top: 10px;}
+.pb10{margin-bottom: 10px;}
+.pl20{margin-left:20px;}
+.pr20{margin-right: 20px;}
+.pt20{margin-top: 20px;}
+.pb20{margin-bottom: 20px;}
+
+table{
+    border-collapse: collapse;
+    border:1px solid #eeeeee;
+    white-space: nowrap;
+}
+table th,td{
+    height: 30px;
+    line-height: 30px;
+    border:1px solid #e0e0e0;
+    padding:5px 10px;
+    white-space: nowrap;
+}
+table tbody tr,table thead tr{
+    background-color: #fff;
+}
+table tbody tr:nth-child(odd){
+    background-color: whitesmoke;
+}
+table tr th:last-child,table tr td:last-child{text-align: center;}
+
+.bg_green{background-color: green;}
+.bg_bule{background-color: blue;}
+.bg_red{background-color: red;}
+.bg88529a{background-color: #88529a;}
+.di{display: inline!important;}
+.db{display: block!important;}
