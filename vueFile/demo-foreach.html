@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<script>
+  let arr=[1,7,4,'g','m',0,4,'h','la'];
+  arr.forEach((v,k) =>{
+    if(isNaN(v)){
+      console.log("nan=",v)
+      // arr.splice(k,1)
+      // arr.push(0)    //错误的替换方式
+     // v=0;      //错误的替换方式
+      //arr[k]=0;  //有效的替换方式
+    }
+  });
+  console.log(arr);
+</script>
+</body>
+</html>

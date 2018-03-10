@@ -23,6 +23,7 @@ export default {
           myData:[],
           t1:'',
           now:-1,
+          ReArr:[ 1,2,3,a,b,c,4,5,6,d,e,f]
       }
     },
     watch:{
@@ -31,6 +32,12 @@ export default {
     mounted(){
       console.log("$jsonp=",jsonp)
       this.deab();
+      this.ReArr.forEach((v,k)=>{
+        console.log('this.ReArr.=',this.ReArr)
+        if(isNaN(v)){
+          this.ReArr.splice(k,1);
+        }
+      })
     },
     methods:{
       deab(){
