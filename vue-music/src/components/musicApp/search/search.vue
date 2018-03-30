@@ -1,12 +1,12 @@
 <template>
     <div>
-      排行榜
+      search
     </div>
 </template>
 
 <script>
 export default {
-  name: 'rank'
+  name: 'search'
 }
 </script>
 

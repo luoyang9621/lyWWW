@@ -1,6 +1,6 @@
-# y
+# vue-music
 
-> A Vue.js project
+> 这个是罗杨的高仿app
 
 ## Build Setup
 
