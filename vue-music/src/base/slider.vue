@@ -89,6 +89,15 @@ export default {
           this.play()
         }
       })
+
+      this.slider.on('touchEnd', (res) => {
+        this.currentPageIndex = this.slider.getCurrentPage().pageX
+
+        if (this.autoPlay) {
+          clearTimeout(this.timer)
+          this.play()
+        }
+      })
     },
     initDots () {
       this.dots = new Array(this.children.length)

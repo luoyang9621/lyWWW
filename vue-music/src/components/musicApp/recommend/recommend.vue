@@ -1,6 +1,6 @@
 <template>
     <div class="recommend">
-      <scroll class="recommend-content">
+      <scroll class="recommend-content" :data="disList">
         <div class="slider-wrapper" v-if="sliderList.length > 0">
           <slider>
             <div v-for="(item, index) in sliderList" :key="index">
@@ -57,7 +57,6 @@ export default {
     _getList () {
       getDisList().then((res) => {
         if (res.code === ERR_OK) {
-          console.log('aaaa', res)
           this.disList = res.data.list
         }
       })
