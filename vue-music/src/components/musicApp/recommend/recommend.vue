@@ -1,6 +1,6 @@
 <template>
     <div class="recommend">
-      <div class="recommend-content">
+      <scroll class="recommend-content">
         <div class="slider-wrapper" v-if="sliderList.length > 0">
           <slider>
             <div v-for="(item, index) in sliderList" :key="index">
@@ -22,7 +22,7 @@
             </li>
           </ul>
         </div>
-      </div>
+      </scroll>
     </div>
 </template>
 
@@ -30,6 +30,7 @@
 import { getRecommend, getDisList } from 'api/recommend'
 import { ERR_OK } from 'api/config'
 import slider from 'base/slider'
+import scroll from 'base/scroll'
 // import axios from 'axios'
 
 export default {
@@ -40,7 +41,7 @@ export default {
       disList: []
     }
   },
-  components: { slider },
+  components: { slider, scroll },
   mounted () {
     this._rank()
     this._getList()
@@ -60,9 +61,6 @@ export default {
           this.disList = res.data.list
         }
       })
-    },
-    _getListFG () {
-
     }
   }
 }
@@ -83,6 +81,7 @@ export default {
         width: 100%
         height: auto
         overflow: hidden
+        z-index: 10;
         .slider-content
           position: absolute
           top: 0
