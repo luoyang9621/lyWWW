@@ -1,26 +1,28 @@
 <template>
     <div class="recommend">
       <scroll class="recommend-content" :data="disList">
-        <div class="slider-wrapper" v-if="sliderList.length > 0">
-          <slider>
-            <div v-for="(item, index) in sliderList" :key="index">
-              <a :href="item.linkUrl"><img :src="item.picUrl" alt=""></a>
-            </div>
-          </slider>
-        </div>
-        <div class="recommend-list">
-          <div class="list-title">推荐歌单</div>
-          <ul>
-            <li v-for="(item, index) in disList" :key="index" class="item">
-              <div class="icon">
-                <img :src="item.imgurl" alt="" width="60" height="60">
+        <div>
+          <div class="slider-wrapper" v-if="sliderList.length > 0">
+            <slider>
+              <div v-for="(item, index) in sliderList" :key="index">
+                <a :href="item.linkUrl"><img :src="item.picUrl" alt=""></a>
               </div>
-              <div class="text">
-                <h2 class="name" v-html="item.creator.name"></h2>
-                <div class="desc" v-html="item.dissname"></div>
-              </div>
-            </li>
-          </ul>
+            </slider>
+          </div>
+          <div class="recommend-list">
+            <div class="list-title">推荐歌单</div>
+            <ul>
+              <li v-for="(item, index) in disList" :key="index" class="item">
+                <div class="icon">
+                  <img :src="item.imgurl" alt="" width="60" height="60">
+                </div>
+                <div class="text">
+                  <h2 class="name" v-html="item.creator.name"></h2>
+                  <div class="desc" v-html="item.dissname"></div>
+                </div>
+              </li>
+            </ul>
+          </div>
         </div>
       </scroll>
     </div>
