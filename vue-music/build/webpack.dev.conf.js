@@ -42,6 +42,23 @@ const devWebpackConfig = merge(baseWebpackConfig, {
           console.log(e)
         })
       })
+
+      app.get('/apis/getSinger', (req, res) => {
+        let url = 'https://shc.y.qq.com/v8/fcg-bin/v8.fcg'
+        axios.get(url, {
+          headers: {
+            referer: 'https://y.qq.com/portal/singer_list.html',
+            authority: 'shc.y.qq.com',
+            host: 'c.y.qq.com'
+          },
+          params: req.params
+        }).then((response) => {
+          res.json(response.data)
+        }).catch(e => {
+          console.log(e)
+        })
+      })
+
     },
     clientLogLevel: 'warning',
     historyApiFallback: {
