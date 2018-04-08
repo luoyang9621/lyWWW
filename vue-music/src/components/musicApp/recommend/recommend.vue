@@ -5,24 +5,27 @@
           <div class="slider-wrapper" v-if="sliderList.length > 0">
             <slider>
               <div v-for="(item, index) in sliderList" :key="index">
-                <a :href="item.linkUrl"><img :src="item.picUrl" alt=""></a>
+                <a :href="item.linkUrl"><img class="needsclick" :src="item.picUrl" alt=""></a>
               </div>
             </slider>
           </div>
           <div class="recommend-list">
             <div class="list-title">推荐歌单</div>
-            <ul>
-              <li v-for="(item, index) in disList" :key="index" class="item">
-                <div class="icon">
-                  <img :src="item.imgurl" alt="" width="60" height="60">
-                </div>
-                <div class="text">
-                  <h2 class="name" v-html="item.creator.name"></h2>
-                  <div class="desc" v-html="item.dissname"></div>
-                </div>
-              </li>
-            </ul>
+              <ul>
+                <li v-for="(item, index) in disList" :key="index" class="item">
+                  <div class="icon">
+                    <img v-lazy="item.imgurl" alt="" width="60" height="60">
+                  </div>
+                  <div class="text">
+                    <h2 class="name" v-html="item.creator.name"></h2>
+                    <div class="desc" v-html="item.dissname"></div>
+                  </div>
+                </li>
+              </ul>
           </div>
+        </div>
+        <div class="loading-container" v-show="disList.length == 0">
+          <loading></loading>
         </div>
       </scroll>
     </div>
@@ -33,6 +36,7 @@ import { getRecommend, getDisList } from 'api/recommend'
 import { ERR_OK } from 'api/config'
 import slider from 'base/slider'
 import scroll from 'base/scroll'
+import loading from 'base/loading'
 // import axios from 'axios'
 
 export default {
@@ -43,10 +47,12 @@ export default {
       disList: []
     }
   },
-  components: { slider, scroll },
+  components: { slider, scroll, loading },
   mounted () {
     this._rank()
-    this._getList()
+    setTimeout(() => {
+      this._getList()
+    }, 1000)
   },
   methods: {
     _rank () {
