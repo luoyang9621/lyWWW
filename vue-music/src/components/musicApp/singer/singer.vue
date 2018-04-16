@@ -27,17 +27,18 @@ export default {
         if (res.code === ERR_OK) {
           console.log(res)
           this.singerList = res.data.list
+          this._normalize(res.data.list)
         }
       })
     },
-    _normalize () {
+    _normalize (list) {
       let map = {
         hot: {
           title: HOT_NAME,
           items: []
         }
       }
-      this.singerList.forEach((item, index) => {
+      list.forEach((item, index) => {
         if (index < HOT_SINGER_LEN) {
           map.hot.items.push(new Singer({
             name: item.Fsinger_name,
@@ -51,7 +52,7 @@ export default {
             items: []
           }
         }
-        map[key].item.push(new Singer({
+        map[key].items.push(new Singer({
           name: item.Fsinger_name,
           mid: item.Fsinger_mid
         }))
@@ -59,7 +60,7 @@ export default {
       // 为了得到a-z的有序列表，需要处理map
       let hot = []
       let singerArr = []
-      for(let key in map) {
+      for (let key in map) {
         let val = map[key]
         if (val.title.match(/[a-zA-Z]/)) {
           singerArr.push(val)
@@ -67,6 +68,11 @@ export default {
           hot.push(val)
         }
       }
+      singerArr.sort(function (a, b) {
+        return a.title.charCodeAt(0) - b.title.charCodeAt(0)
+      })
+      singerArr.concat(hot)
+      console.log(singerArr)
     }
   }
 }
