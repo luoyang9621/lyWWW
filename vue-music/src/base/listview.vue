@@ -11,7 +11,7 @@
         <li v-for="group in dataList" class="list-group" :key="group.title" ref="listgroup">
           <h2 class="list-group-title">{{ group.title }}</h2>
           <ul>
-            <li v-for="item in group.items" class="list-group-item" :key="item.name">
+            <li v-for="item in group.items" class="list-group-item" :key="item.name" @click="selectItem(item)">
               <img class="avatar" v-lazy="item.avatar" alt="">
               <span class="name">{{ item.name }}</span>
             </li>
@@ -151,6 +151,9 @@ export default {
         height += list[i].clientHeight
         this.listHeight.push(height)
       }
+    },
+    selectItem (item) {
+      this.$emit('select', item)
     }
   }
 }

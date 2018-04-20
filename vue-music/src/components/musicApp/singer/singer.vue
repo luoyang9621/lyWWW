@@ -1,6 +1,7 @@
 <template>
     <div class="singer" ref="singer">
-      <list-view :dataList="singerList"></list-view>
+      <list-view :dataList="singerList" @select="selectSinger"></list-view>
+      <router-view></router-view>
     </div>
 </template>
 
@@ -73,6 +74,12 @@ export default {
         return a.title.charCodeAt(0) - b.title.charCodeAt(0)
       })
       return hot.concat(singerArr)
+    },
+    selectSinger (singer) {
+      console.log(singer)
+      this.$route.push({
+        path: `${singer.id}`
+      })
     }
   }
 }
