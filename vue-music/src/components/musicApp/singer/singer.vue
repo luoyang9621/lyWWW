@@ -1,10 +1,11 @@
 <template>
     <div class="singer" ref="singer">
-      这个是singer
+      <list-view :dataList="singerList"></list-view>
     </div>
 </template>
 
 <script>
+import ListView from 'base/listview'
 import { getSinger } from 'api/singer'
 import { ERR_OK } from 'api/config'
 import { Singer } from 'common/js/singer'
@@ -17,17 +18,17 @@ export default {
       singerList: []
     }
   },
+  components: {
+    ListView
+  },
   mounted () {
     this._getSinger()
   },
   methods: {
     _getSinger () {
-      console.log(111)
       getSinger().then((res) => {
         if (res.code === ERR_OK) {
-          console.log(res)
-          this.singerList = res.data.list
-          this._normalize(res.data.list)
+          this.singerList = this._normalize(res.data.list)
         }
       })
     },
@@ -71,8 +72,7 @@ export default {
       singerArr.sort(function (a, b) {
         return a.title.charCodeAt(0) - b.title.charCodeAt(0)
       })
-      singerArr.concat(hot)
-      console.log(singerArr)
+      return hot.concat(singerArr)
     }
   }
 }
