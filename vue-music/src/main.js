@@ -4,6 +4,7 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import vueLazyLoad from 'vue-lazyload'
+import store from './store'
 
 Vue.use(vueLazyLoad, {
   loading: require('common/image/default.png')
@@ -14,5 +15,6 @@ Vue.config.productionTip = false
 new Vue({
   el: '#app',
   router,
+  store,
   render: h => h(App)
 })
