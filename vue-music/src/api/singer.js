@@ -2,7 +2,7 @@ import myJsonp from 'common/js/jsonp'
 import {commonParams, options} from 'api/config'
 
 export function getSinger () {
-  const url = '/apis/getSinger'
+  const url = 'https://shc.y.qq.com/v8/fcg-bin/v8.fcg'
   const data = Object.assign({}, commonParams, {
     channel: 'singer',
     page: 'list',

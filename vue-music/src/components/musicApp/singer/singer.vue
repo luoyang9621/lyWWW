@@ -1,15 +1,18 @@
 <template>
     <div class="singer">
-      这个是singer
-      <ul>
-        <li v-for='(item, index) in singerList' :key="index">{{ item.Fsinger_name }}</li>
-      </ul>
+      <list-view :data="singerList"></list-view>
     </div>
 </template>
 
-<script>
+<script type="javascript">
 import { getSinger } from 'api/singer'
 import { ERR_OK } from 'api/config'
+import Singer from 'common/js/singer'
+import listView from 'base/listview'
+
+const Regx = /^[A-Za-z]*$/
+const HOT_NAME = '热门'
+const HOT_NAME_LEN = 10
 export default {
   name: 'singer',
   data () {
@@ -17,6 +20,7 @@ export default {
       singerList: []
     }
   },
+  components: { listView },
   mounted () {
     this._getSinger()
   },
@@ -24,9 +28,56 @@ export default {
     _getSinger () {
       getSinger().then((res) => {
         if (res.code === ERR_OK) {
-          console.log(res)
+          this.singerList = this.normalize(res.data.list)
         }
       })
+    },
+    normalize (list) {
+      let map = {
+        hot: {
+          title: HOT_NAME,
+          items: []
+        }
+      }
+      list.forEach((item, index) => {
+        const key = item.Findex
+        if (index < HOT_NAME_LEN) {
+          map.hot.items.push(new Singer({
+            mid: item.Fsinger_mid,
+            name: item.Fsinger_name
+          }))
+        }
+        if (!map[key]) {
+          map[key] = {
+            title: key,
+            items: []
+          }
+        }
+        map[key].items.push(new Singer({
+          mid: item.Fsinger_mid,
+          name: item.Fsinger_name
+        }))
+      })
+
+      // 为了得到有序列表 ，需要处理map
+      let hot = []
+      let resArr = []
+      let others = []
+      for (let key in map) {
+        let val = map[key]
+        if (val.title === HOT_NAME) {
+          hot.push(val)
+        } else if (!Regx.test(val.title)) {
+          val.title = '#'
+          others.push(val)
+        } else {
+          resArr.push(val)
+        }
+      }
+      resArr.sort(function (a, b) {
+        return a.title.charCodeAt(0) - b.title.charCodeAt(0)
+      })
+      return hot.concat(resArr.concat(others))
     }
   }
 }

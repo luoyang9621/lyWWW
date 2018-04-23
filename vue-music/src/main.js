@@ -3,6 +3,11 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import vueLazyLoad from 'vue-lazyload'
+
+Vue.use(vueLazyLoad, {
+  loading: require('common/image/default.png')
+})
 
 Vue.config.productionTip = false
 
