@@ -1,38 +1,87 @@
 <template>
-  <scroll class="listview" :data='data' ref="listview">
+  <scroll class="listview" :data='data' ref="listview" :listenScroll="true" @scroll="scroll" :probeType="probeType">
     <ul>
         <li v-for="(group, index) in data" class="list-group" :key="index" ref="listGroup">
             <h2 class="list-group-title">{{ group.title }}</h2>
             <ul>
-                <li v-for="item in group.items" class="list-group-item" :key="item.mid">
+                <li v-for="item in group.items" class="list-group-item" :key="item.mid" @click='selectItem(item)'>
                     <img class="avatar" v-lazy="item.avatar" alt="">
                     <span class="name">{{ item.name }}</span>
                 </li>
             </ul>
         </li>
     </ul>
-    <div class="list-shortcut">
+    <div class="list-shortcut"  @touchstart="onTouchStart">
       <ul>
-        <li v-for="(item, index) in shortcutList" :key="item"  class="item" :class="{ 'current': currIndex === index }"  @touchstart="onTouchStart" :data-index="index">{{ item }}</li>
+        <li v-for="(item, index) in shortcutList" :key="item"  class="item" :data-index="index" :class="{ 'current': currIndex === index }">{{ item }}</li>
       </ul>
+    </div>
+    <div class="list-fixed" v-show='fixedTitle' ref='fixTitle'>
+      <h1 class="fixed-title">{{ fixedTitle }}</h1>
+    </div>
+    <div class="loading-container" v-show='!data.length'>
+      <loading></loading>
     </div>
   </scroll>
 </template>
 <script type="javascript">
 import scroll from 'base/scroll'
 import { getData } from 'common/js/dom'
+import loading from 'base/loading'
+
+const TITLE_HEIGHT = 30
+
 export default {
   name: 'listview',
   data () {
     return {
-      currIndex: 0
+      currIndex: 0,
+      scrollY: -1,
+      listHeight: [],
+      probeType: 3,
+      diff: -1
     }
   },
-  components: { scroll },
+  components: { scroll, loading },
   props: {
     data: {
       type: Array,
       default: []
+    }
+  },
+  watch: {
+    scrollY: function (newVal) {
+      let listHeight = this.listHeight
+      // 当滚动到顶部，切 newY 》0
+      if (newVal > 0) {
+        this.currIndex = 0
+        return
+      }
+      // 中间部分滚动
+      for (let i = 0; i < listHeight.length - 1; i++) {
+        let height1 = listHeight[i]
+        let height2 = listHeight[i + 1]
+        if ((-newVal >= height1) && (-newVal < height2)) {
+          this.currIndex = i
+          this.diff = height2 + newVal
+          return
+        }
+      }
+      // 底部滚动
+      this.currIndex = listHeight.length - 2
+    },
+    data () {
+      setTimeout(() => {
+        this._calculateHeight()
+      }, 20)
+    },
+    diff (newVal) {
+      let fixedTop = (newVal > 0 && newVal < TITLE_HEIGHT) ? newVal - TITLE_HEIGHT : 0
+      if (this.fixedTop === fixedTop) {
+        return
+      }
+      this.fixedTop = fixedTop
+      this.$refs.fixTitle.style.transform = `translate3d(0, ${fixedTop}px, 0)`
     }
   },
   computed: {
@@ -40,19 +89,50 @@ export default {
       return this.data.map((res) => {
         return res.title.substr(0, 1)
       })
+    },
+    fixedTitle () {
+      if (this.scrollY > 0) {
+        return ''
+      }
+      return this.data[this.currIndex] ? this.data[this.currIndex].title : ''
     }
   },
   mounted () {
-    setTimeout(() => {
-      console.log('data', this.shortcutList)
-    }, 100)
+
   },
   methods: {
     onTouchStart (e) {
       let anchorIndex = parseInt(getData(e.target, 'index'))
-      console.log('anchorIndex=', anchorIndex)
-      this.$refs.listview.scrollToElement(this.$refs.listGroup[anchorIndex], 0)
-      this.currIndex = anchorIndex
+      this._scrollTo(anchorIndex)
+    },
+    scroll (pos) {
+      this.scrollY = pos.y
+    },
+    _scrollTo (index) {
+      if (!index && index !== 0) {
+        return
+      }
+      if (index < 0) {
+        index = 0
+      } else if (index > this.listHeight.length - 2) {
+        index = this.listHeight.length - 2
+      }
+      this.currIndex = index
+      this.$refs.listview.scrollToElement(this.$refs.listGroup[index], 0)
+    },
+    _calculateHeight () {
+      this.listHeight = []
+      const list = this.$refs.listGroup
+      let height = 0
+      this.listHeight.push(height)
+      for (let i = 0; i < list.length; i++) {
+        let item = list[i].clientHeight
+        height += item
+        this.listHeight.push(height)
+      }
+    },
+    selectItem (item) {
+      this.$emit('select', item)
     }
   }
 }

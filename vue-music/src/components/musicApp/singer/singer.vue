@@ -1,6 +1,7 @@
 <template>
     <div class="singer">
-      <list-view :data="singerList"></list-view>
+      <list-view :data="singerList" @select="selectSinger"></list-view>
+      <router-view></router-view>
     </div>
 </template>
 
@@ -9,6 +10,7 @@ import { getSinger } from 'api/singer'
 import { ERR_OK } from 'api/config'
 import Singer from 'common/js/singer'
 import listView from 'base/listview'
+import { mapMutations } from 'vuex'
 
 const Regx = /^[A-Za-z]*$/
 const HOT_NAME = '热门'
@@ -78,7 +80,16 @@ export default {
         return a.title.charCodeAt(0) - b.title.charCodeAt(0)
       })
       return hot.concat(resArr.concat(others))
-    }
+    },
+    selectSinger (singer) {
+      this.$router.push({
+        path: `/singer/${singer.mid}`
+      })
+      this.setSinger(singer)
+    },
+    ...mapMutations({
+      setSinger: 'SET_SINGER'
+    })
   }
 }
 </script>

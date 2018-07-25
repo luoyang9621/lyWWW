@@ -5,6 +5,7 @@ import rank from 'musicApp/rank/rank'
 import singer from 'musicApp/singer/singer'
 import recommend from 'musicApp/recommend/recommend'
 import search from 'musicApp/search/search'
+import SingerDetail from 'musicApp/singer/singer-detail'
 
 Vue.use(Router)
 
@@ -24,7 +25,14 @@ export default new Router({
         {
           path: '/singer',
           name: 'singer',
-          component: singer
+          component: singer,
+          children: [
+            {
+              path: ':id',
+              name: 'SingerDetail',
+              component: SingerDetail
+            }
+          ]
         },
         {
           path: '/recommend',
