@@ -31,7 +31,7 @@
   </div>
 </template>
 <script>
-import songList from 'musicApp/song-list/song-list'
+import songList from 'components/song-list/song-list'
 import Scroll from 'base/scroll'
 import loading from 'base/loading'
 import { prefixStyle } from 'common/js/dom'
@@ -66,7 +66,8 @@ export default {
       let blur = 0
       let translateY = Math.max(this.minTranslateY, newY)
       this.$refs.layer.style[transform] = `translate3d(0, ${translateY}px, 0)`
-      let scale = 1, percent = Math.abs(newY / this.imgHeight)
+      let scale = 1
+      let percent = Math.abs(newY / this.imgHeight)
       if (newY > 0) {
         scale = 1 + percent
       } else {

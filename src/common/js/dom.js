@@ -32,7 +32,7 @@ let vendor = (() => {
     standard: 'transform'
   }
 
-  for(let key in transformNames) {
+  for (let key in transformNames) {
     if (elementStyle[transformNames[key]] !== undefined) {
       return key
     }

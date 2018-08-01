@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import appHead from 'musicApp/head/appHead'
+import appHead from 'components/head/appHead'
 export default {
   name: 'index',
   components: {
