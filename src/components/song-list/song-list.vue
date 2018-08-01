@@ -1,7 +1,7 @@
 <template>
     <div class="song-list">
         <ul>
-            <li class="item" v-for="(item, index) in songs" :key="index">
+            <li @click="selectItem(item, index)" class="item" v-for="(item, index) in songs" :key="index">
                 <div class="content">
                   <h2 class="name">{{ item.name }} </h2>
                   <p class="desc">{{ item | getDesc }}</p>
@@ -16,6 +16,11 @@ export default {
     songs: {
       type: Array,
       default: []
+    }
+  },
+  methods: {
+    selectItem (item, index) {
+      this.$emit('select', item, index)
     }
   },
   filters: {
