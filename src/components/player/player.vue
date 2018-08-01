@@ -26,7 +26,7 @@
               <i class="icon-sequence"></i>
             </div>
             <div class="icon i-left">
-              <i class="icon-perv"></i>
+              <i class="icon-prev"></i>
             </div>
             <div class="icon i-center">
               <i class="icon-play"></i>
