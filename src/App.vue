@@ -8,7 +8,7 @@
       <li><router-link to="/search">搜索</router-link></li>
     </ul>
     <router-view/>
-    <Player v-if="fullScreen"></Player>
+    <Player></Player>
   </div>
 </template>
 <style lang="stylus">
