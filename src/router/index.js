@@ -35,6 +35,33 @@ export default new Router({
       path: '/search',
       name: 'search',
       component: search
+    },
+    {
+      path: '/demo',
+      name: 'demoindex',
+      component: () => import(/* webpackChunkName: "demoindex" */ './../components/demo/index'),
+      children: [
+        {
+          path: 'demo1',
+          name: 'demo1',
+          component: () => import(/* webpackChunkName: "demo1" */'./../components/demo/demo1')
+        },
+        {
+          path: 'demo2',
+          name: 'demo2',
+          component: () => import(/* webpackChunkName: "demo2" */'./../components/demo/demo2')
+        },
+        {
+          path: 'demo3',
+          name: 'demo3',
+          component: () => import(/* webpackChunkName: "demo3" */'./../components/demo/demo3')
+        },
+        {
+          path: 'demo4',
+          name: 'demo4',
+          component: () => import(/* webpackChunkName: "demo4" */'./../components/demo/demo4')
+        }
+      ]
     }
   ]
 })

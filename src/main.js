@@ -5,6 +5,7 @@ import App from './App'
 import router from './router'
 import vueLazyLoad from 'vue-lazyload'
 import store from './store'
+import './../static/css/app.css'
 
 Vue.use(vueLazyLoad, {
   loading: require('common/image/default.png')
