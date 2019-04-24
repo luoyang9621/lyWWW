@@ -5,18 +5,10 @@
         <router-link :to="{ name: 'demo2' }" class="btn">demo2</router-link>
         <router-link :to="{ name: 'demo3' }" class="btn">demo3</router-link>
         <router-link :to="{ name: 'demo4' }" class="btn">demo4</router-link>
+        <button @click="back()">回退</button>
       </div>
       <transition
-        name="slide-top"
-        @before-enter="beforeEnter"
-        @enter="enter"
-        @after-enter="afterEnter"
-        @enter-cancelled="enterCancelled"
-
-        @before-leave="beforeLeave"
-        @leave="leave"
-        @after-leave="afterLeave"
-        @leave-cancelled="leaveCancelled"
+        :name="transitionName"
       >
         <router-view
           class="router-view"
@@ -30,12 +22,22 @@ export default {
   name: 'demo1',
   data () {
     return {
-      show1: true
+      show1: true,
+      transitions: 'top',
+    }
+  },
+  computed: {
+    transitionName: function () {
+      return `slide-${this.transitions}`;
     }
   },
   methods: {
     changeShow1 () {
       this.show1 = !this.show1
+    },
+    back() {
+      this.transitions = 'bottom';
+      this.$router.back();
     },
     // --------
     // 进入中
@@ -115,6 +117,7 @@ export default {
     left: 0;
     transition: all ease .5s;
     visibility: visible;
+    backface-visibility: hidden;
   }
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-    <div class="wrap">
+    <div class="wrap2">
       333333333333啊啊啊啊啊啊啊啊啊啊啊啊
     </div>
 </template>
@@ -14,15 +14,15 @@ export default {
   },
   methods: {
     changeShow1 () {
-      this.show1 = !this.show1
-    }
+      this.show1 = !this.show1;
+    },
   }
 }
 </script>
 
 <style lang="scss" scoped>
-.wrap {
+.wrap2 {
   background-color: yellowgreen;
-  color: #999;
+  color: #fff;
 }
 </style>

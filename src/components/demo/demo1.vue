@@ -1,5 +1,5 @@
 <template>
-    <div class="wrap">
+    <div class="wrap2">
       demo1里面的内容demo1里面的内容
       demo1里面的内容demo1里面的内容
     </div>
@@ -22,8 +22,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.wrap {
+.wrap2 {
   background-color: red;
-  color: #999;
+  color: #fff;
 }
 </style>

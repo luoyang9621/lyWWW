@@ -1,6 +1,6 @@
 <template>
-    <div class="wrap">
-      333333333333啊啊啊啊啊啊啊啊啊啊啊啊
+    <div class="wrap2">
+      444444444444444444444啊啊啊啊啊啊啊啊啊啊啊啊
     </div>
 </template>
 
@@ -21,8 +21,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.wrap {
+.wrap2 {
   background-color: dodgerblue;
-  color: #999;
+  color: #fff;
 }
 </style>

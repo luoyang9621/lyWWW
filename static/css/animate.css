@@ -1,11 +1,53 @@
-.slide-top-enter, .slide-top-leave-to {
+/*
+  vue的动画过场是v-enter到v-enter-active再到v-enter-to
+  v-leave到v-leave-active再到v-leave-to,
+
+  v-leave是还没有
+*/
+
+.normal-enter, .normal-leave-to {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+.normal-enter-active, .normal-leave-active {
+  opacity: 0;
+  transform: translate3d(0, 0, 0);
+}
+
+
+/*向上滑动覆盖，原页面略微缩小*/
+.slide-top-enter {
   transform: translate3d(0, 100%, 0);
-  /*opacity: 0;*/
 }
-.slide-top-enter-active, .slide-top-leave-active {
-  transition: all .3s ease;
-  /*opacity: 1;*/
+.slide-top-leave-active {
+  transform: translate3d(0, 0, 0);
 }
+.slide-top-leave-to {
+  transform: scale(0.95);
+}
+
+/*向下滑动，原页面直接往下滑动，新页面放大到1倍在出现，没有位移*/
+.slide-bottom-enter {
+  /*transform: translate3d(0, 0, 0);*/
+  transform: scale(0.95)
+}
+.slide-bottom-enter-to {
+  transform: scale(1);
+}
+.slide-bottom-leave {
+  transform: translate3d(0, 0, 0);
+}
+.slide-bottom-leave-active {
+  transform: translate3d(0, 100%, 0);
+}
+.slide-bottom-leave-to {
+  transform: translate3d(0, 100%, 0);
+}
+
+
+/*
+  这种keyframes的动画是直接加在class上面的
+*/
 @keyframes top {
   from {
     transform: translate3d(0, -100%, 0);
