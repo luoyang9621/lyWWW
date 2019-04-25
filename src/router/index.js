@@ -12,7 +12,8 @@ export default new Router({
     {
       path: '/rank',
       name: 'rank',
-      component: rank
+      component: rank,
+      direct: '',
     },
     {
       path: '/singer',

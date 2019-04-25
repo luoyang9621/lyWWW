@@ -35,13 +35,16 @@
   transform: scale(1) translate3d(0, 0, 0);
 }
 .slide-bottom-leave {
-  transform: translate3d(0, 0, 1px);
+  transform: translate3d(0, 0, 10px);
+  z-index: 10;
 }
 .slide-bottom-leave-active {
-  transform: translate3d(0, 100%, 1px);
+  transform: translate3d(0, 100%, 10px);
+  /*z-index: 10;*/
 }
 .slide-bottom-leave-to {
-  transform: translate3d(0, 100%, 1px);
+  transform: translate3d(0, 100%, 10px);
+  z-index: 10;
 }
 
 
