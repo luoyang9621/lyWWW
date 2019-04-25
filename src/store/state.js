@@ -7,7 +7,8 @@ const state = {
   playList: [],
   sequenceList: [],
   mode1: playMode.sequence,
-  currentIndex: -1
+  currentIndex: -1,
+  routerDirection: 'forward'
 }
 
 export default state

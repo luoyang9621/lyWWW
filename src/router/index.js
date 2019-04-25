@@ -1,41 +1,48 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import rank from 'components/rank/rank'
-import singer from 'components/singer/singer'
-import recommend from 'components/recommend/recommend'
-import search from 'components/search/search'
-import SingerDetail from 'components/singer/singer-detail'
+import Setting from './setting'
 
 Vue.use(Router)
-export default new Router({
+const router = new Router({
   routes: [
     {
       path: '/rank',
       name: 'rank',
-      component: rank,
-      direct: '',
+      component: () => import(/* rank */ 'components/rank/rank'),
+      meta: {
+        direct: 'forward'
+      }
     },
     {
       path: '/singer',
       name: 'singer',
-      component: singer,
+      component: () => import(/* singer */ 'components/singer/singer'),
       children: [
         {
           path: ':id',
           name: 'SingerDetail',
-          component: SingerDetail
+          component: () => import(/* SingerDetail */ 'components/singer/singer-detail'),
+          meta: {
+            direct: 'forward'
+          }
         }
       ]
     },
     {
       path: '/recommend',
       name: 'recommend',
-      component: recommend
+      component: () => import(/* recommend */ 'components/recommend/recommend'),
+      meta: {
+        direct: 'forward'
+      }
     },
     {
       path: '/search',
       name: 'search',
-      component: search
+      component: () => import(/* search */ 'components/search/search'),
+      meta: {
+        direct: 'forward'
+      }
     },
     {
       path: '/demo',
@@ -45,24 +52,40 @@ export default new Router({
         {
           path: 'demo1',
           name: 'demo1',
-          component: () => import(/* webpackChunkName: "demo1" */'./../components/demo/demo1')
+          component: () => import(/* webpackChunkName: "demo1" */'./../components/demo/demo1'),
+          meta: {
+            direct: 'forward'
+          }
         },
         {
           path: 'demo2',
           name: 'demo2',
-          component: () => import(/* webpackChunkName: "demo2" */'./../components/demo/demo2')
+          component: () => import(/* webpackChunkName: "demo2" */'./../components/demo/demo2'),
+          meta: {
+            direct: 'forward'
+          }
         },
         {
           path: 'demo3',
           name: 'demo3',
-          component: () => import(/* webpackChunkName: "demo3" */'./../components/demo/demo3')
+          component: () => import(/* webpackChunkName: "demo3" */'./../components/demo/demo3'),
+          meta: {
+            direct: 'forward'
+          }
         },
         {
           path: 'demo4',
           name: 'demo4',
-          component: () => import(/* webpackChunkName: "demo4" */'./../components/demo/demo4')
+          component: () => import(/* webpackChunkName: "demo4" */'./../components/demo/demo4'),
+          meta: {
+            direct: 'top'
+          }
         }
       ]
     }
   ]
 })
+
+Setting(router)
+
+export default router

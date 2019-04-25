@@ -6,3 +6,7 @@ export const selectPlay = function ({commit, state}, {list, index}) {
   commit(types.SET_FULL_SCREEN, true)
   commit(types.SET_PLAYING_STATE, true)
 }
+
+export const updateRouterDirect = function ({commit, state}, val) {
+  commit(types.UPDATE_ROUTER_DIRECTION, val)
+}

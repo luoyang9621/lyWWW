@@ -16,41 +16,80 @@
 
 
 /*向上滑动覆盖，原页面略微缩小*/
-.slide-top-enter {
+.top-enter {
   transform: translate3d(0, 100%, 0);
 }
-.slide-top-leave-active {
+.top-leave-active {
   transform: translate3d(0, 0, 0);
 }
-.slide-top-leave-to {
+.top-leave-to {
   transform: scale(0.95);
 }
 
-/*向下滑动，原页面直接往下滑动，新页面放大到1倍在出现，没有位移*/
-.slide-bottom-enter {
+/*============
+  向下滑动，原页面直接往下滑动，新页面放大到1倍在出现，没有位移
+  用于某些top滑入的页面回退的时候的
+==============*/
+.bottom-enter {
   /*transform: translate3d(0, 0, 0);*/
   transform: scale(0.95) translate3d(0, 0, 0);
 }
-.slide-bottom-enter-to {
+.bottom-enter-to {
   transform: scale(1) translate3d(0, 0, 0);
 }
-.slide-bottom-leave {
-  transform: translate3d(0, 0, 10px);
-  z-index: 10;
-}
-.slide-bottom-leave-active {
-  transform: translate3d(0, 100%, 10px);
+
+/*.bottom-leave {*/
+  /*transform: translate3d(0, 0, 10px);*/
   /*z-index: 10;*/
-}
-.slide-bottom-leave-to {
+/*}*/
+/*.bottom-leave-active {*/
+  /*transform: translate3d(0, 100%, 10px);*/
+/*}*/
+.bottom-leave-to {
   transform: translate3d(0, 100%, 10px);
   z-index: 10;
 }
+/*===========================*/
 
 
-/*
+/**===========================
+  页面从右侧滑入，一般用于页面进入下一个页面的动画
+ ===========================**/
+.forward-enter {
+  transform: translate3d(100%, 0, 0);
+}
+.forward-enter-active {
+  /*transform: translate3d(100%, 0, 0);*/
+}
+.forward-enter-to {
+  /*transform: translate3d(0, 0, 0);*/
+}
+
+.forward-leave {
+  /*transform: translate3d(0, 0, 0);*/
+}
+.forward-leave-active {
+  /*transform: translate3d(0, 0, 0);*/
+}
+.forward-leave-to {
+  transform: translate3d(-100%, 0, 0);
+}
+/*=======================*/
+
+
+/*=====================
+  页面从左侧滑入，一般用于forward的页面退出的
+=======================*/
+.back-enter {
+  transform: translate3d(-100%, 0, 0);
+}
+.back-leave-to {
+  transform: translate3d(100%, 0, 0);
+}
+
+/*============
   这种keyframes的动画是直接加在class上面的
-*/
+=================*/
 @keyframes top {
   from {
     transform: translate3d(0, -100%, 0);

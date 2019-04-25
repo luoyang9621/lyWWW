@@ -40,7 +40,7 @@
 <script>
 import Player from 'components/player/player'
 import appHead from 'components/head/appHead'
-import { mapGetters } from 'vuex'
+import { mapGetters , mapState } from 'vuex'
 export default {
   name: 'App',
   components: {
@@ -50,7 +50,24 @@ export default {
     ...mapGetters([
       'fullScreen',
       'playList'
+    ]),
+    ...mapState([
+      'routerDirection'
     ])
+  },
+  mounted () {
+    window.addEventListener('popstate', this.goBack, false)
+  },
+  methods: {
+    goBack (val) {
+      console.log(val, window.history)
+      if (this.routerDirection === 'top') {
+        this.$store.dispatch('updateRouterDirect', 'bottom')
+      }
+      if (this.routerDirection === 'forward') {
+        this.$store.dispatch('updateRouterDirect', 'back')
+      }
+    }
   }
 }
 </script>

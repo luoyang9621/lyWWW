@@ -21,6 +21,9 @@ const mutations = {
   },
   [types.SET_CURRENT_INDEX] (state, index) {
     state.currentIndex = index
+  },
+  [types.UPDATE_ROUTER_DIRECTION] (state, val) {
+    state.routerDirection = val
   }
 }
 

@@ -18,26 +18,31 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
+
 export default {
   name: 'demo1',
   data () {
     return {
       show1: true,
-      transitions: 'top',
+      transitions: 'top'
     }
   },
   computed: {
+    ...mapState([
+      'routerDirection'
+    ]),
     transitionName: function () {
-      return `slide-${this.transitions}`;
+      return this.routerDirection ? this.routerDirection : this.transitions
     }
   },
   methods: {
     changeShow1 () {
       this.show1 = !this.show1
     },
-    back() {
-      this.transitions = 'bottom';
-      this.$router.back();
+    back () {
+      this.transitions = 'bottom'
+      this.$router.back()
     },
     // --------
     // 进入中

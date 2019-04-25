@@ -14,8 +14,8 @@ export default {
   },
   methods: {
     changeShow1 () {
-      this.show1 = !this.show1;
-    },
+      this.show1 = !this.show1
+    }
   }
 }
 </script>
