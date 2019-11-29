@@ -36,7 +36,6 @@ module.exports = {
     alias: {
       'vue$': 'vue/dist/vue.esm.js',
       '@': resolve('src'),
-      'musicApp': resolve('src/components/musicApp'),
       'common': resolve('src/common'),
       'components': resolve('src/components'),
       'api': resolve('src/api'),
@@ -73,17 +72,13 @@ module.exports = {
         }
       },
       {
-        test: /\.(woff|woff2?|eot|ttf|otf)(\?.*)?$/,
+        test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
         loader: 'url-loader',
         options: {
           limit: 10000,
           name: utils.assetsPath('fonts/[name].[hash:7].[ext]')
         }
-      },
-      {  //手动添加这一条，相当于是编译识别sass!
-        test: /\.scss$/,
-        loaders: ["style", "css", "sass"],
-      },
+      }
     ]
   },
   node: {

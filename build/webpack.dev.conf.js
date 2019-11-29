@@ -9,8 +9,6 @@ const CopyWebpackPlugin = require('copy-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 const portfinder = require('portfinder')
-const axios = require('axios')
-const bodyParser = require('body-parser')
 
 const HOST = process.env.HOST
 const PORT = process.env.PORT && Number(process.env.PORT)
@@ -24,42 +22,6 @@ const devWebpackConfig = merge(baseWebpackConfig, {
 
   // these devServer options should be customized in /config/index.js
   devServer: {
-    before(app) {
-      app.use(bodyParser.urlencoded({extended: true}))
-
-      app.get('/apis/getDisList', (req, res) => {
-        let url = 'https://c.y.qq.com/splcloud/fcgi-bin/fcg_get_diss_by_tag.fcg'
-        axios.get(url, {
-          headers: {
-            referer: 'https://y.qq.com/portal/playlist.html',
-            authority: 'c.y.qq.com',
-            host: 'c.y.qq.com'
-          },
-          params: req.query
-        }).then((response) => {
-           res.json(response.data)
-        }).catch((e) => {
-          console.log(e)
-        })
-      })
-
-      app.get('/apis/getSinger', (req, res) => {
-        let url = 'https://shc.y.qq.com/v8/fcg-bin/v8.fcg'
-        axios.get(url, {
-          headers: {
-            referer: 'https://y.qq.com/portal/singer_list.html',
-            authority: 'shc.y.qq.com',
-            host: 'c.y.qq.com'
-          },
-          params: req.params
-        }).then((response) => {
-          res.json(response.data)
-        }).catch(e => {
-          console.log(e)
-        })
-      })
-
-    },
     clientLogLevel: 'warning',
     historyApiFallback: {
       rewrites: [

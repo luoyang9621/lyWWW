@@ -40,7 +40,7 @@
 <script>
 import Player from 'components/player/player'
 import appHead from 'components/head/appHead'
-import { mapGetters , mapState } from 'vuex'
+import { mapGetters, mapState } from 'vuex'
 export default {
   name: 'App',
   components: {
